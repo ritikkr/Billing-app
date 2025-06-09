@@ -1,10 +1,8 @@
-# Build stage
-FROM gradle:7.6.0-jdk17 AS build
+FROM openjdk:17 AS build
 WORKDIR /app
 COPY . .
-RUN gradle clean build -x test
+RUN chmod +x ./gradlew && ./gradlew clean build -x test
 
-# Runtime stage
 FROM openjdk:17.0.1-jdk-slim
 WORKDIR /app
 COPY --from=build /app/build/libs/*.jar app.jar
