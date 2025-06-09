@@ -1,6 +1,6 @@
 # Stage 1: Build the Spring Boot application
-# Uses a JDK image to compile the Java source code and build the JAR.
-FROM openjdk:17-jdk-slim AS builder
+# Uses a JDK image from Eclipse Temurin for compilation.
+FROM eclipse-temurin:17-jdk-focal AS builder
 
 # Set the working directory inside the container for the build stage.
 WORKDIR /app
@@ -30,9 +30,8 @@ RUN chmod +x gradlew
 RUN ./gradlew bootJar -x test
 
 # Stage 2: Create the final, lightweight runtime image
-# Uses a JRE image, which is much smaller than a JDK image as it only contains the runtime
-# environment for Java applications, not the compilation tools.
-FROM openjdk:17-jre-slim
+# Uses a JRE image from Eclipse Temurin, which is much smaller than a JDK image.
+FROM eclipse-temurin:17-jre-focal
 
 # Set the working directory inside the container for the runtime stage.
 WORKDIR /app
