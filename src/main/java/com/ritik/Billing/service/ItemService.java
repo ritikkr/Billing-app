@@ -25,10 +25,11 @@ public class ItemService {
     public ItemResponse createItem(ItemRequest request) {
         Item item = new Item();
         item.setName(request.getName());
+        item.setType(request.getType());
+        item.setHsnSacCode(request.getHsnSacCode());
         item.setDescription(request.getDescription());
         item.setUnitPrice(request.getUnitPrice());
         item.setUnitOfMeasure(request.getUnitOfMeasure());
-        item.setSku(request.getSku());
         item.setTaxable(request.isTaxable());
         item.setActive(true); // Default to active
 
@@ -46,7 +47,7 @@ public class ItemService {
     @Transactional(readOnly = true)
     public List<ItemResponse> getAllItems(boolean includeInactive) {
         List<Item> items = includeInactive ? itemRepository.findAll() :
-                itemRepository.findAll().stream().filter(Item::isActive).collect(Collectors.toList());
+                itemRepository.findAll().stream().filter(Item::isActive).toList();
         return items.stream()
                 .map(this::mapToItemResponse)
                 .collect(Collectors.toList());
@@ -61,7 +62,8 @@ public class ItemService {
         existingItem.setDescription(request.getDescription());
         existingItem.setUnitPrice(request.getUnitPrice());
         existingItem.setUnitOfMeasure(request.getUnitOfMeasure());
-        existingItem.setSku(request.getSku());
+        existingItem.setType(request.getType());
+        existingItem.setHsnSacCode(request.getHsnSacCode());
         existingItem.setTaxable(request.isTaxable());
         // isActive will be managed by a separate method if needed, or included in request if partial update is allowed.
 
@@ -85,8 +87,9 @@ public class ItemService {
         response.setName(item.getName());
         response.setDescription(item.getDescription());
         response.setUnitPrice(item.getUnitPrice());
+        response.setType(item.getType());
+        response.setHsnSacCode(item.getHsnSacCode());
         response.setUnitOfMeasure(item.getUnitOfMeasure());
-        response.setSku(item.getSku());
         response.setTaxable(item.isTaxable());
         response.setCreatedAt(item.getCreatedAt());
         response.setUpdatedAt(item.getUpdatedAt());

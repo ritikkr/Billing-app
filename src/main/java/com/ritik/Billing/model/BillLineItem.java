@@ -43,4 +43,7 @@ public class BillLineItem extends BaseEntity {
     private BigDecimal lineTotal; // quantity * unitPriceAtTimeOfBilling
 
     private boolean taxable; // Snapshot of item's taxable status
+
+    @Column(length = 20)
+    private String hsnSacCode; // Supports HSN or SAC codes
 }

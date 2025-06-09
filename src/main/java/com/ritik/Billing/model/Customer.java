@@ -19,22 +19,15 @@ public class Customer extends BaseEntity {
     private Long id;
 
     @Column(nullable = false)
-    private String firstName;
-
-    private String lastName;
+    private String companyName;
 
     @Column(nullable = false, unique = true)
     private String email;
 
-    private String phone;
-    private String addressLine1;
-    private String addressLine2;
-    private String city;
-    private String state;
-    private String zipCode;
-    private String country;
-    private String companyName; // Optional, for B2B customers
+    private String contact;
+    private String address;
     private String taxId;       // e.g., GSTIN, VAT ID
+    private String gstPreferences;
 
     // You might add one-to-many relationship to Bills here, but it's often better
     // to manage relationships from the "many" side (Bill manages Customer reference).

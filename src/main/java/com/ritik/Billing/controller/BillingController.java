@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/bills")
+@CrossOrigin(origins = "*") // Allow all origins for simplicity; adjust as needed
 public class BillingController {
 
     private final BillingService billingService;

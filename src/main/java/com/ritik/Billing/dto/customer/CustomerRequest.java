@@ -7,12 +7,9 @@ import lombok.Data;
 
 @Data
 public class CustomerRequest {
-    @NotBlank(message = "First name is required")
+    @NotBlank(message = "Company name is required")
     @Size(max = 100)
-    private String firstName;
-
-    @Size(max = 100)
-    private String lastName;
+    private String companyName;
 
     @NotBlank(message = "Email is required")
     @Email(message = "Invalid email format")
@@ -20,22 +17,14 @@ public class CustomerRequest {
     private String email;
 
     @Size(max = 20)
-    private String phone;
+    private String contact;
 
     @Size(max = 255)
-    private String addressLine1;
-    @Size(max = 255)
-    private String addressLine2;
-    @Size(max = 100)
-    private String city;
-    @Size(max = 100)
-    private String state;
-    @Size(max = 20)
-    private String zipCode;
-    @Size(max = 100)
-    private String country;
-    @Size(max = 255)
-    private String companyName;
+    private String address;
+
     @Size(max = 50)
     private String taxId;
+
+    @Size(max = 50)
+    private String gstPreferences; // e.g., "Registered", "Unregistered"
 }

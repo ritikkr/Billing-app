@@ -13,4 +13,5 @@ public class BillLineItemDetailsDto {
     private BigDecimal unitPriceAtTimeOfBilling;
     private BigDecimal lineTotal;
     private boolean taxable;
+    private String hsnSacCode;
 }

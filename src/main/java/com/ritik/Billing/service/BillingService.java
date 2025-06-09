@@ -136,7 +136,7 @@ public class BillingService {
         response.setId(bill.getId());
         response.setInvoiceNumber(bill.getInvoiceNumber());
         response.setCustomerId(bill.getCustomer().getId());
-        response.setCustomerName(bill.getCustomer().getFirstName() + " " + bill.getCustomer().getLastName());
+        response.setCustomerName(bill.getCustomer().getCompanyName());
         response.setIssueDate(bill.getIssueDate());
         response.setDueDate(bill.getDueDate());
         response.setStatus(bill.getStatus());

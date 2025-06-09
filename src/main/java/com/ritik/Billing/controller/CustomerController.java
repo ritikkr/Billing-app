@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/customers")
+@CrossOrigin(origins = "*") // Allow all origins for simplicity; adjust as needed
 public class CustomerController {
 
     private final CustomerService customerService;

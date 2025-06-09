@@ -8,10 +8,11 @@ import java.time.LocalDateTime;
 public class ItemResponse {
     private Long id;
     private String name;
+    private String type; // e.g., "Product", "Service"
+    private String hsnSacCode; // Harmonized System Code or Service Accounting Code
     private String description;
     private BigDecimal unitPrice;
     private String unitOfMeasure;
-    private String sku;
     private boolean taxable;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

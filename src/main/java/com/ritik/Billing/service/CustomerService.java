@@ -24,17 +24,12 @@ public class CustomerService {
     public CustomerResponse createCustomer(CustomerRequest request) {
         Customer customer = new Customer();
         // Map request DTO to entity
-        customer.setFirstName(request.getFirstName());
-        customer.setLastName(request.getLastName());
-        customer.setEmail(request.getEmail());
-        customer.setPhone(request.getPhone());
-        customer.setAddressLine1(request.getAddressLine1());
-        customer.setAddressLine2(request.getAddressLine2());
-        customer.setCity(request.getCity());
-        customer.setState(request.getState());
-        customer.setZipCode(request.getZipCode());
-        customer.setCountry(request.getCountry());
         customer.setCompanyName(request.getCompanyName());
+        customer.setEmail(request.getEmail());
+        customer.setContact(request.getContact());
+        customer.setGstPreferences(request.getGstPreferences());
+        customer.setAddress(request.getAddress());
+
         customer.setTaxId(request.getTaxId());
         customer.setActive(true); // Default to active
 
@@ -52,7 +47,7 @@ public class CustomerService {
     @Transactional(readOnly = true)
     public List<CustomerResponse> getAllCustomers(boolean includeInactive) {
         List<Customer> customers = includeInactive ? customerRepository.findAll() :
-                customerRepository.findAll().stream().filter(Customer::isActive).collect(Collectors.toList());
+                customerRepository.findAll().stream().filter(Customer::isActive).toList();
         return customers.stream()
                 .map(this::mapToCustomerResponse)
                 .collect(Collectors.toList());
@@ -64,18 +59,12 @@ public class CustomerService {
                 .orElseThrow(() -> new ResourceNotFoundException("Customer not found with ID: " + id));
 
         // Update fields
-        existingCustomer.setFirstName(request.getFirstName());
-        existingCustomer.setLastName(request.getLastName());
         existingCustomer.setEmail(request.getEmail());
-        existingCustomer.setPhone(request.getPhone());
-        existingCustomer.setAddressLine1(request.getAddressLine1());
-        existingCustomer.setAddressLine2(request.getAddressLine2());
-        existingCustomer.setCity(request.getCity());
-        existingCustomer.setState(request.getState());
-        existingCustomer.setZipCode(request.getZipCode());
-        existingCustomer.setCountry(request.getCountry());
+        existingCustomer.setContact(request.getContact());
+        existingCustomer.setAddress(request.getAddress());
         existingCustomer.setCompanyName(request.getCompanyName());
         existingCustomer.setTaxId(request.getTaxId());
+        existingCustomer.setGstPreferences(request.getGstPreferences());
         // createdAt and updatedAt are handled by BaseEntity
 
         Customer updatedCustomer = customerRepository.save(existingCustomer);
@@ -95,16 +84,9 @@ public class CustomerService {
     private CustomerResponse mapToCustomerResponse(Customer customer) {
         CustomerResponse response = new CustomerResponse();
         response.setId(customer.getId());
-        response.setFirstName(customer.getFirstName());
-        response.setLastName(customer.getLastName());
+        response.setContact(customer.getContact());
         response.setEmail(customer.getEmail());
-        response.setPhone(customer.getPhone());
-        response.setAddressLine1(customer.getAddressLine1());
-        response.setAddressLine2(customer.getAddressLine2());
-        response.setCity(customer.getCity());
-        response.setState(customer.getState());
-        response.setZipCode(customer.getZipCode());
-        response.setCountry(customer.getCountry());
+        response.setAddress(customer.getAddress());
         response.setCompanyName(customer.getCompanyName());
         response.setTaxId(customer.getTaxId());
         response.setCreatedAt(customer.getCreatedAt());

@@ -14,6 +14,14 @@ public class ItemRequest {
     @Size(max = 255)
     private String name;
 
+    @NotBlank(message = "Item type is required")
+    @Size(max = 50, message = "Item type must be up to 50 characters")
+    private String type; // e.g., "Product", "Service"
+
+    @NotBlank(message = "HSN/SAC code is required")
+    @Size(max = 20, message = "HSN/SAC code must be up to 20 characters")
+    private String hsnSacCode; // Harmonized System Code or Service Accounting Code
+
     @Size(max = 500)
     private String description;
 
@@ -23,9 +31,6 @@ public class ItemRequest {
 
     @Size(max = 50)
     private String unitOfMeasure;
-
-    @Size(max = 100)
-    private String sku;
 
     private boolean taxable = true;
 }

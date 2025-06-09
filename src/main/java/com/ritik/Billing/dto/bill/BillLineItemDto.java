@@ -14,4 +14,9 @@ public class BillLineItemDto {
     @NotNull(message = "Quantity is required")
     @DecimalMin(value = "0.01", message = "Quantity must be greater than zero")
     private BigDecimal quantity;
+
+    @NotNull
+    @DecimalMin(value = "0.01", message = "Unit price must be greater than zero")
+    private BigDecimal unitPriceAtTimeOfBilling; // Crucial: Price at time of bill creation
+
 }
